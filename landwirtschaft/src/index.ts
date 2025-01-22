@@ -2,6 +2,8 @@ import { load } from 'ts-dotenv'
 import { LogLevel, Nautilus } from '@deltadao/nautilus'
 import { Network, NETWORK_CONFIGS, PRICING_CONFIGS } from './config'
 import { Wallet, providers} from 'ethers'
+import {editAgriProductAsset, publishAgriProductAsset} from "./asset";
+import {askQuestion} from "./ui"
 
 const env = load({
     NETWORK: String,
@@ -32,11 +34,38 @@ const privateKey = env.PRIVATE_KEY as string // make sure to setup your PRIVATE_
 const provider = new providers.JsonRpcProvider(networkConfig.nodeUri)
 const wallet = new Wallet(privateKey, provider)
 
+
+
 async function main(){
     Nautilus.setLogLevel(LogLevel.Verbose) // optional to show more nautilus internal logs
     const nautilus = await Nautilus.create(wallet, networkConfig)
-    const asset = await nautilus.getAquariusAsset("did:op:18bce08da1adaf545be512d9592b4175c29e2136ec60c10d472fb3860fecf60e")
-    console.log('Name of asset: ', asset.metadata.name)
+    console.log("Willkommen! Was möchten Sie tun?");
+    console.log("1: Publish");
+    console.log("2: Edit");
+    console.log("0: Beenden");
+
+    const choice = await askQuestion("Bitte wählen Sie eine Option (1, 2 oder 0): ");
+
+    switch (choice) {
+        case '1':
+            await publishAgriProductAsset(nautilus, networkConfig, pricingConfig, wallet);
+            break;
+        case '2':
+            await editAgriProductAsset(nautilus, networkConfig, pricingConfig, wallet);
+            break;
+        case '0':
+            console.log("Programm beendet.");
+            return;
+        default:
+            console.log("Ungültige Auswahl. Bitte erneut versuchen.\n");
+            break;
+    }
+
+    // Nach Abschluss zurück zum Menü
+    await main();
+
+    // const asset = await nautilus.getAquariusAsset("did:op:18bce08da1adaf545be512d9592b4175c29e2136ec60c10d472fb3860fecf60e")
+    // console.log('Name of asset: ', asset.metadata.name)
 }
 
 main()

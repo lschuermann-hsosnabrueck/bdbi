@@ -8,6 +8,7 @@ yarn-error.log*
 /.pnp
 .pnp.js
 
+.DS_Store
 /dist
 .env
 .vscode/*

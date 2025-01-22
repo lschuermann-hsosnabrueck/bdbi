@@ -54,7 +54,7 @@ export async function publishAgriProductAsset(
         .setDatatokenNameAndSymbol('My Datatoken Name', 'SYMBOL') // important for following access token transactions in the explorer
         .addConsumerParameter(consumerParameter)
         .addTrustedAlgorithmPublisher('0x103501f5db82F162ec6807d21A8D847ed4b77cAc')
-        .addTrustedAlgorithms([{did: 'did:op:c77a7c151663a07d179d3a419508019ed01aa178aca24e323d173946da997c23'}]) // algorithm to create order
+        .addTrustedAlgorithms([{did: 'did:op:0b45cdedf10b927bb3e30916b9af65c9fac6cef00f8c84d08997b9cdcc399667'}]) // algorithm to create order
         .build()
 
     const assetBuilder = new AssetBuilder()

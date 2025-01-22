@@ -23,13 +23,13 @@ const did = dids[0];
 const outputFile = path.join(outputFolder, "results.json");
 const serviceFilePath = path.join(ddoFolder, did);
 const didHash = did.replace("did:op:", ""); // Entferne das "did:op:" Präfix
-const inputFile = path.join(inputFolder, didHash, "0", "order.json");
+const inputFile = path.join(inputFolder, didHash, "0");
 
 async function createOrder() {
     let productName = "Unbekannt";
 
     // Überprüfung: Existiert die `order.json`?
-    if (!fs.existsSync(inputFile) || fs.statSync(inputFile).size === 0) {
+    if (!fs.existsSync(inputFile)) {
         console.error("order.json nicht gefunden oder leer:", inputFile);
         process.exit(1);
     }

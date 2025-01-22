@@ -1,11 +1,12 @@
 import {
     AssetBuilder,
     ConsumerParameterBuilder,
+    CredentialListTypes,
     FileTypes,
     Nautilus,
     ServiceBuilder,
     ServiceTypes,
-    UrlFile
+    UrlFile,
 } from "@deltadao/nautilus";
 import {NetworkConfig} from "./config";
 import {Wallet} from "ethers";
@@ -48,8 +49,10 @@ export async function publishAgriProductAsset(
         .setTimeout(600)
         .addFile(urlFile)
         .setPricing(pricingConfig.FREE)
-        .setDatatokenNameAndSymbol('Data Compute Token', 'DCT') // important for following access token transactions in the explorer
+        .setDatatokenNameAndSymbol('My Datatoken Name', 'SYMBOL') // important for following access token transactions in the explorer
         .addConsumerParameter(consumerParameter)
+        .addTrustedAlgorithmPublisher('0x103501f5db82F162ec6807d21A8D847ed4b77cAc')
+        .addTrustedAlgorithms([{did: 'did:op:93bbcf464d5e09d4a7fcfe18eac9674d15ec9a97c2afda22d0f4858253e95280'}]) // algorithm to create order
         .build()
 
     const assetBuilder = new AssetBuilder()
@@ -58,8 +61,10 @@ export async function publishAgriProductAsset(
         .setName(productName)
         .setDescription(description)
         .setAuthor("HS Osnabrueck")
+        .setLicense('MIT')
         .addService(service)
         .setOwner(owner)
+        .addCredentialAddresses(CredentialListTypes.ALLOW, ['0x103501f5db82F162ec6807d21A8D847ed4b77cAc'])
         .build()
 
     const result = await nautilus.publish(asset)

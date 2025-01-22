@@ -2,7 +2,7 @@ import { load } from 'ts-dotenv'
 import { LogLevel, Nautilus } from '@deltadao/nautilus'
 import { Network, NETWORK_CONFIGS, PRICING_CONFIGS } from './config'
 import { Wallet, providers} from 'ethers'
-import {editAgriProductAsset, publishAgriProductAsset} from "./asset";
+import {publishAgriAlgoAsset, publishAgriProductAsset} from "./asset";
 import {askQuestion} from "./ui"
 
 const env = load({
@@ -40,8 +40,8 @@ async function main(){
     Nautilus.setLogLevel(LogLevel.Verbose) // optional to show more nautilus internal logs
     const nautilus = await Nautilus.create(wallet, networkConfig)
     console.log("Willkommen! Was möchten Sie tun?");
-    console.log("1: Publish");
-    console.log("2: Edit");
+    console.log("1: Publish Produkt-Asset");
+    console.log("2: Publish Algo´-Asset");
     console.log("0: Beenden");
 
     const choice = await askQuestion("Bitte wählen Sie eine Option (1, 2 oder 0): ");
@@ -51,7 +51,7 @@ async function main(){
             await publishAgriProductAsset(nautilus, networkConfig, pricingConfig, wallet);
             break;
         case '2':
-            await editAgriProductAsset(nautilus, networkConfig, pricingConfig, wallet);
+            await publishAgriAlgoAsset(nautilus, networkConfig, pricingConfig, wallet);
             break;
         case '0':
             console.log("Programm beendet.");

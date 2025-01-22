@@ -21,6 +21,8 @@ export async function publishAgriProductAsset(
     console.log("Publish Agri-Produkt")
     const productName = await askQuestion("Produktname: ")
     const description = await askQuestion("Produktbeschreibung: ")
+    const pricePerKg = await askQuestion("Preis pro kg: ")
+    const certificate = await askQuestion("Zertifikat (Bioland, Demeter, ...): ")
     const owner = await wallet.getAddress()
     const consumerParameterBuilder = new ConsumerParameterBuilder()
 
@@ -60,6 +62,10 @@ export async function publishAgriProductAsset(
         .setType('dataset')
         .setName(productName)
         .setDescription(description)
+        .addAdditionalInformation({
+            pricePerKg : pricePerKg,
+            certificate : certificate
+        })
         .setAuthor("HS Osnabrueck")
         .setLicense('MIT')
         .addService(service)
@@ -71,12 +77,57 @@ export async function publishAgriProductAsset(
     console.log(result)
 }
 
-export async function editAgriProductAsset(
+export async function publishAgriAlgoAsset(
     nautilus: Nautilus,
     networkConfig: NetworkConfig,
     pricingConfig: any,
     wallet: Wallet
 ){
-    console.log("Edit Agri-Produkt");
+    console.log("Publishing Agri-Algorithm");
+    const owner = await wallet.getAddress()
+    const serviceBuilder = new ServiceBuilder({
+        serviceType: ServiceTypes.COMPUTE,
+        fileType: FileTypes.URL
+    })
+    const urlFile: UrlFile = {
+        type: 'url',
+        url: 'https://github.com/lschuermann-hsosnabrueck/bdbi/blob/landwirtschaft-industrie/landwirtschaft/assets/createOrder.js',
+        method: 'GET'
+    }
 
+    const service = serviceBuilder
+        .setServiceEndpoint(networkConfig.providerUri)
+        .setTimeout(86400)
+        .addFile(urlFile)
+        .setPricing(pricingConfig.FREE)
+        .setDatatokenNameAndSymbol('My Datatoken Name', 'SYMBOL')
+        .build()
+
+    const algoMetadata = {
+        language: 'Node.js',
+        version: '1.0.0',
+        container: {
+            // https://hub.docker.com/layers/library/node/18.17.1/images/sha256-91e37377b960d0b15d3c15d15321084163bc8d950e14f77bbc84ab23cf3d6da7?context=explore
+            entrypoint: 'node $ALGO',
+            image: 'node',
+            tag: '18.17.1',
+            checksum:
+                'sha256:91e37377b960d0b15d3c15d15321084163bc8d950e14f77bbc84ab23cf3d6da7'
+        }
+    }
+    const assetBuilder = new AssetBuilder()
+
+    const asset = assetBuilder
+        .setType('algorithm')
+        .setName('Create Order Algorithm')
+        .setDescription('Algorithm to create order for product')
+        .setAuthor('HS Osnabrueck')
+        .setLicense('MIT')
+        .setAlgorithm(algoMetadata)
+        .addService(service)
+        .setOwner(owner)
+        .build()
+
+    const result = await nautilus.publish(asset)
+    console.log(result)
 }

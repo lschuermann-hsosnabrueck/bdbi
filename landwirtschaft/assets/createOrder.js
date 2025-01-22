@@ -38,10 +38,9 @@ async function createOrder() {
     if (fs.existsSync(serviceFilePath) && fs.statSync(serviceFilePath).size > 0) {
         try {
             const ddo = JSON.parse(fs.readFileSync(serviceFilePath, 'utf8'));
-            console.log("DDO Inhalt:", JSON.stringify(ddo, null, 2));
-
+            //console.log("DDO Inhalt:", JSON.stringify(ddo, null, 2));
             if (ddo) {
-                productName = ddo.name;
+                productName = ddo.metadata.name;
             }
         } catch (err) {
             console.error("Fehler beim Lesen der DDO-Datei:", err);

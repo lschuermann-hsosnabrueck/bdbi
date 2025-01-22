@@ -40,16 +40,8 @@ async function createOrder() {
             const ddo = JSON.parse(fs.readFileSync(serviceFilePath, 'utf8'));
             console.log("DDO Inhalt:", JSON.stringify(ddo, null, 2));
 
-            // Metadaten-Service finden und Name des Produkts extrahieren
-            const metadataService = ddo.service.find(service => service.type === 'metadata');
-            if (!metadataService) {
-                console.error("Fehler: Kein Service mit Typ 'metadata' gefunden!");
-            }
-            if (!metadataService.attributes || !metadataService.attributes.main) {
-                console.error("Fehler: `attributes.main` fehlt im Metadata-Service!");
-            }
-            if (metadataService) {
-                productName = metadataService.attributes.main.name || "Unbekannt";
+            if (ddo) {
+                productName = ddo.name;
             }
         } catch (err) {
             console.error("Fehler beim Lesen der DDO-Datei:", err);

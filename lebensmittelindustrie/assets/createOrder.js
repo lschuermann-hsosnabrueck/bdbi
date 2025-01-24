@@ -53,7 +53,7 @@ async function createOrder() {
     order.agriDid = ddo.metadata.additionalInformation.agriDid
     order.jobId = ddo.metadata.additionalInformation.jobId
     order.agreementId = ddo.metadata.additionalInformation.agreementId
-    order.agriOrigin = ddo.metadata.additionalInformation.origin
+    order.agriOrigin = ddo.metadata.additionalInformation.agriOrigin
     order.productName = ddo.metadata.name
     order.pricePerUnit = ddo.metadata.additionalInformation.pricePerUnit
     order.agriCertificate = ddo.metadata.additionalInformation.agriCertificate

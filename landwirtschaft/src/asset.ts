@@ -21,7 +21,7 @@ export async function publishAgriProductAsset(
     console.log("Publish Agri-Produkt")
     const productName = await askQuestion("Produktname: ")
     const description = await askQuestion("Produktbeschreibung: ")
-    const pricePerKg = await askQuestion("Preis pro kg: ")
+    const pricePerKg = Number(await askQuestion("Preis pro kg: "))
     const certificate = await askQuestion("Zertifikat (Bioland, Demeter, ...): ")
     const owner = await wallet.getAddress()
 

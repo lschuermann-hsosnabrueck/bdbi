@@ -7,7 +7,7 @@
   },
   "productName": "",
   "quantity": 0,
-  "pricePerKg": "",
-  "totalPrice": "",
+  "pricePerKg": 0,
+  "totalPrice": 0,
   "certificate": ""
 }

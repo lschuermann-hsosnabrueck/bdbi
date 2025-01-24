@@ -32,7 +32,7 @@ export async function publishAgriProductAsset(
 
     const urlFile: UrlFile = {
         type: 'url',
-        url: 'https://raw.githubusercontent.com/lschuermann-hsosnabrueck/bdbi/refs/heads/landwirtschaft-industrie/landwirtschaft/assets/order.json',
+        url: 'https://raw.githubusercontent.com/lschuermann-hsosnabrueck/bdbi/refs/heads/main/landwirtschaft/assets/order.json',
         method: 'GET'
     }
 
@@ -43,7 +43,7 @@ export async function publishAgriProductAsset(
         .setPricing(pricingConfig.FREE)
         .setDatatokenNameAndSymbol('My Datatoken Name', 'SYMBOL') // important for following access token transactions in the explorer
         .addTrustedAlgorithmPublisher('0x103501f5db82F162ec6807d21A8D847ed4b77cAc')
-        .addTrustedAlgorithms([{did: 'did:op:a484ceae2002d5e2237e2f81de8f0d151e3610b39dfc6070d8f2792a10409ca8'}]) // algorithm to create order
+        .addTrustedAlgorithms([{did: 'did:op:606ca1825958edbbfbd819fc8976df2bc4bcc0a737cac230233d65902f3e3c35'}]) // algorithm to create order
         .build()
 
     const assetBuilder = new AssetBuilder()
@@ -80,7 +80,7 @@ export async function publishAgriAlgoAsset(
     })
     const urlFile: UrlFile = {
         type: 'url',
-        url: 'https://raw.githubusercontent.com/lschuermann-hsosnabrueck/bdbi/refs/heads/landwirtschaft-industrie/landwirtschaft/assets/createOrder.js',
+        url: 'https://raw.githubusercontent.com/lschuermann-hsosnabrueck/bdbi/refs/heads/main/landwirtschaft/assets/createOrder.js',
         method: 'GET'
     }
 

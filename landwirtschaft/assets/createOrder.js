@@ -41,7 +41,7 @@ async function createOrder() {
         ddo = JSON.parse(fs.readFileSync(serviceFilePath, 'utf8'))
         //console.log("DDO Inhalt:", JSON.stringify(ddo, null, 2));
         algoCustomData = JSON.parse(fs.readFileSync(algoCustomDataFile, 'utf8'))
-        console.log("CustomData Inhalt:", JSON.stringify(algoCustomData, null, 2));
+        //console.log("CustomData Inhalt:", JSON.stringify(algoCustomData, null, 2));
     } catch (err) {
         console.error("Fehler beim Lesen:", err);
         process.exit(1);

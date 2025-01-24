@@ -24,16 +24,6 @@ export async function publishAgriProductAsset(
     const pricePerKg = await askQuestion("Preis pro kg: ")
     const certificate = await askQuestion("Zertifikat (Bioland, Demeter, ...): ")
     const owner = await wallet.getAddress()
-    const consumerParameterBuilder = new ConsumerParameterBuilder()
-
-    const consumerParameter = consumerParameterBuilder
-        .setType('number')
-        .setName('quantity')
-        .setLabel('Quantity')
-        .setDescription('Order quantity (kg)')
-        .setDefault('50')
-        .setRequired(true)
-        .build()
 
     const serviceBuilder = new ServiceBuilder({
         serviceType: ServiceTypes.COMPUTE,
@@ -52,7 +42,6 @@ export async function publishAgriProductAsset(
         .addFile(urlFile)
         .setPricing(pricingConfig.FREE)
         .setDatatokenNameAndSymbol('My Datatoken Name', 'SYMBOL') // important for following access token transactions in the explorer
-        .addConsumerParameter(consumerParameter)
         .addTrustedAlgorithmPublisher('0x103501f5db82F162ec6807d21A8D847ed4b77cAc')
         .addTrustedAlgorithms([{did: 'did:op:2fd8236a811a351719766973652a70802fbda7789f12a9d0868022062ce635fb'}]) // algorithm to create order
         .build()
@@ -95,11 +84,23 @@ export async function publishAgriAlgoAsset(
         method: 'GET'
     }
 
+    const consumerParameterBuilder = new ConsumerParameterBuilder()
+
+    const consumerParameter = consumerParameterBuilder
+        .setType('number')
+        .setName('quantity')
+        .setLabel('Quantity')
+        .setDescription('Order quantity (kg)')
+        .setDefault('50')
+        .setRequired(true)
+        .build()
+
     const service = serviceBuilder
         .setServiceEndpoint(networkConfig.providerUri)
         .setTimeout(86400)
         .addFile(urlFile)
         .setPricing(pricingConfig.FREE)
+        .addConsumerParameter(consumerParameter)
         .setDatatokenNameAndSymbol('My Datatoken Name', 'SYMBOL')
         .build()
 

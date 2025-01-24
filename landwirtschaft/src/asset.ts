@@ -43,7 +43,7 @@ export async function publishAgriProductAsset(
         .setPricing(pricingConfig.FREE)
         .setDatatokenNameAndSymbol('My Datatoken Name', 'SYMBOL') // important for following access token transactions in the explorer
         .addTrustedAlgorithmPublisher('0x103501f5db82F162ec6807d21A8D847ed4b77cAc')
-        .addTrustedAlgorithms([{did: 'did:op:2fd8236a811a351719766973652a70802fbda7789f12a9d0868022062ce635fb'}]) // algorithm to create order
+        .addTrustedAlgorithms([{did: 'did:op:a484ceae2002d5e2237e2f81de8f0d151e3610b39dfc6070d8f2792a10409ca8'}]) // algorithm to create order
         .build()
 
     const assetBuilder = new AssetBuilder()

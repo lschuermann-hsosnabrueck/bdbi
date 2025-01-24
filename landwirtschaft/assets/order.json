@@ -6,7 +6,7 @@
     "grower" : ""
   },
   "productName": "",
-  "quantity": "",
+  "quantity": 0,
   "pricePerKg": "",
   "totalPrice": "",
   "certificate": ""

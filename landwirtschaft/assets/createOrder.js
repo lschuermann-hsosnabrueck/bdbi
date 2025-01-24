@@ -27,7 +27,7 @@ const inputFile = path.join(inputFolder, didHash, "0");
 const algoCustomDataFile = path.join(inputFolder, 'algoCustomData.json');
 
 async function createOrder() {
-    // Überprüfung: Existiert die `order.json`?
+
     if (!fs.existsSync(inputFile) || !fs.existsSync(serviceFilePath) || !fs.existsSync(algoCustomDataFile)) {
         console.error("Eine der Dateien nicht nicht gefunden:", inputFile, serviceFilePath, algoCustomDataFile);
         process.exit(1);
@@ -55,7 +55,7 @@ async function createOrder() {
     order.pricePerKg = ddo.metadata.additionalInformation.pricePerKg
     order.certificate = ddo.metadata.additionalInformation.certificate
     order.quantity = algoCustomData.quantity
-    order.totalPrice = Number(order.quantity) * Number(order.pricePerKg)
+    order.totalPrice = order.quantity * Number(order.pricePerKg)
 
     // Ergebnis speichern
     try {

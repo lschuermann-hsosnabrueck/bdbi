@@ -52,7 +52,7 @@ async function createOrder() {
     order.origin.country = 'GER'
     order.origin.grower = 'HS Osnabrueck'
     order.productName = ddo.metadata.name
-    order.pricePerKg = ddo.metadata.additionialInformation.pricePerKg
+    order.pricePerKg = ddo.metadata.additionalInformation.pricePerKg
     order.certificate = ddo.metadata.additionalInformation.certificate
     order.quantitiy = algoCustomData.quantitiy
     order.totalPrice = order.quantitiy * order.pricePerKg

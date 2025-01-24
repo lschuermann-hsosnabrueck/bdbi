@@ -46,7 +46,7 @@ async function createOrder() {
         process.exit(1);
     }
 
-    const date = Date().toString()
+    const date = new Date().toISOString()
     order.orderId = 'AP-' + date
     order.date = date
     order.origin.country = 'GER'
@@ -54,8 +54,8 @@ async function createOrder() {
     order.productName = ddo.metadata.name
     order.pricePerKg = ddo.metadata.additionalInformation.pricePerKg
     order.certificate = ddo.metadata.additionalInformation.certificate
-    order.quantitiy = algoCustomData.quantitiy
-    order.totalPrice = order.quantitiy * order.pricePerKg
+    order.quantity = algoCustomData.quantity
+    order.totalPrice = Number(order.quantity) * Number(order.pricePerKg)
 
     // Ergebnis speichern
     try {

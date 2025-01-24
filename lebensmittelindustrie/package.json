@@ -1,0 +1,19 @@
+{
+  "name": "lebensmittelindustrie",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "npx tsc && node dist/index.js"
+  },
+  "dependencies": {
+    "ts-dotenv": "^0.9.1",
+    "@deltadao/nautilus": "^1.0.1",
+    "ethers": "^5.7.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.3"
+  },
+  "private": true
+}

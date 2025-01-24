@@ -1,0 +1,16 @@
+{
+  "orderId" : "",
+  "date": "",
+  "agriDid":  "",
+  "agriOrigin" : {
+    "country" : "",
+    "grower" : ""
+  },
+  "agriCertificate": "",
+  "jobId": "",
+  "agreementId": "",
+  "productName": "",
+  "quantity": 0,
+  "pricePerUnit": 0,
+  "totalPrice": 0
+}

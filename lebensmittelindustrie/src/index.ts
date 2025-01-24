@@ -40,7 +40,7 @@ async function main(){
     Nautilus.setLogLevel(LogLevel.Verbose) // optional to show more nautilus internal logs
     const nautilus = await Nautilus.create(wallet, networkConfig)
     console.log("Willkommen! Was möchten Sie tun?");
-    console.log("1: Publish Agri-Produkt-Asset");
+    console.log("1: Publish Produkt-Asset");
     console.log("2: Publish Algo-Asset");
     console.log("0: Beenden");
 

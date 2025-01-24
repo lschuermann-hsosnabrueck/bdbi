@@ -24,39 +24,38 @@ const outputFile = path.join(outputFolder, "results.json");
 const serviceFilePath = path.join(ddoFolder, did);
 const didHash = did.replace("did:op:", ""); // Entferne das "did:op:" Präfix
 const inputFile = path.join(inputFolder, didHash, "0");
+const algoCustomDataFile = path.join(inputFolder, 'algoCustomData.json');
 
 async function createOrder() {
-    let productName = "Unbekannt";
-
     // Überprüfung: Existiert die `order.json`?
-    if (!fs.existsSync(inputFile)) {
-        console.error("order.json nicht gefunden oder leer:", inputFile);
+    if (!fs.existsSync(inputFile) || !fs.existsSync(serviceFilePath) || !fs.existsSync(algoCustomDataFile)) {
+        console.error("Eine der Dateien nicht nicht gefunden:", inputFile, serviceFilePath, algoCustomDataFile);
         process.exit(1);
-    }
-    console.log("Order-JSON gefunden unter:", inputFile);
-
-    if (fs.existsSync(serviceFilePath) && fs.statSync(serviceFilePath).size > 0) {
-        try {
-            const ddo = JSON.parse(fs.readFileSync(serviceFilePath, 'utf8'));
-            //console.log("DDO Inhalt:", JSON.stringify(ddo, null, 2));
-            if (ddo) {
-                productName = ddo.metadata.name;
-            }
-        } catch (err) {
-            console.error("Fehler beim Lesen der DDO-Datei:", err);
-        }
-    } else {
-        console.warn("DDO-Datei existiert nicht oder ist leer:", serviceFilePath);
     }
 
     let order;
+    let algoCustomData;
+    let ddo;
     try {
         order = JSON.parse(fs.readFileSync(inputFile, 'utf8'));
-        order.productName = productName;
+        ddo = JSON.parse(fs.readFileSync(serviceFilePath, 'utf8'))
+        //console.log("DDO Inhalt:", JSON.stringify(ddo, null, 2));
+        algoCustomData = JSON.parse(fs.readFileSync(algoCustomDataFile, 'utf8'))
     } catch (err) {
-        console.error("Fehler beim Lesen der order.json:", err);
+        console.error("Fehler beim Lesen:", err);
         process.exit(1);
     }
+
+    const date = Date().toString()
+    order.orderId = 'AP-' + date
+    order.date = date
+    order.origin.country = 'GER'
+    order.origin.grower = 'HS Osnabrueck'
+    order.productName = ddo.metadata.name
+    order.pricePerKg = ddo.metadata.additionialInformation.pricePerKg
+    order.certificate = ddo.metadata.additionalInformation.certificate
+    order.quantitiy = algoCustomData.quantitiy
+    order.totalPrice = order.quantitiy * order.pricePerKg
 
     // Ergebnis speichern
     try {

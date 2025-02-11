@@ -21,8 +21,8 @@ Um das Projekt zu starten sind folgende Schritte notwendig:
    5. ``PRIVATE_KEY``: Der eigene private Schlüssel des Wallets
 6. Falls ein anderer Account genutzt wird, als der mit dem das Projekt erstellt wurde, müssen eventuell an verschiedenen
 Stellen Anpassungen vorgenommen werden. Diese sind in den READMEs der Projekte und in Kommentaren im Code
-weiter erklärt. Mit dem ursprünglichen Account ist das Projekt ohne weitere Anpassungen ausführbar.
-   7. Für die beiden Accounts der HS Osnabrück sollte der Prototyp funktionieren.
+weiter erklärt. Mit dem ursprünglichen Account ist das Projekt ohne weitere Anpassungen ausführbar. Die beiden Adressen der HS Osnabrück
+sind als berechtigte Adressen eingetragen.
 7. Starten des Skripts: ``npm start``
 
 Die Assets sind im assets-Ordner des jeweiligen Projtes zu finden. Für dieses Projekt müssen diese an einem

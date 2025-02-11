@@ -43,7 +43,8 @@ export async function publishAgriProductAsset(
         .setPricing(pricingConfig.FREE)
         .setDatatokenNameAndSymbol('My Datatoken Name', 'SYMBOL') // important for following access token transactions in the explorer
         .addTrustedAlgorithmPublisher('0x103501f5db82F162ec6807d21A8D847ed4b77cAc')
-        .addTrustedAlgorithms([{did: 'did:op:606ca1825958edbbfbd819fc8976df2bc4bcc0a737cac230233d65902f3e3c35'}]) // algorithm to create order
+        .addTrustedAlgorithmPublisher('0xb2D3015C7356Dfde2FFe3AaBf148460A03dc74A3') //Hinzufügen von accounts
+        .addTrustedAlgorithms([{did: 'did:op:606ca1825958edbbfbd819fc8976df2bc4bcc0a737cac230233d65902f3e3c35'}]) // Hier entsprechendne Algorithmus angeben
         .build()
 
     const assetBuilder = new AssetBuilder()
@@ -59,7 +60,7 @@ export async function publishAgriProductAsset(
         .setLicense('MIT')
         .addService(service)
         .setOwner(owner)
-        .addCredentialAddresses(CredentialListTypes.ALLOW, ['0x103501f5db82F162ec6807d21A8D847ed4b77cAc'])
+        .addCredentialAddresses(CredentialListTypes.ALLOW, ['0x103501f5db82F162ec6807d21A8D847ed4b77cAc', '0xb2D3015C7356Dfde2FFe3AaBf148460A03dc74A3']) // hier Accounts hinzufügen, die Zugriff haben sollen
         .build()
 
     const result = await nautilus.publish(asset)
@@ -126,7 +127,7 @@ export async function publishAgriAlgoAsset(
         .setLicense('MIT')
         .setAlgorithm(algoMetadata)
         .addService(service)
-        .addCredentialAddresses(CredentialListTypes.ALLOW, ['0x103501f5db82F162ec6807d21A8D847ed4b77cAc'])
+        .addCredentialAddresses(CredentialListTypes.ALLOW, ['0x103501f5db82F162ec6807d21A8D847ed4b77cAc', '0xb2D3015C7356Dfde2FFe3AaBf148460A03dc74A3']) // hier Accounts hinzufügen, die Zugriff haben sollen
         .setOwner(owner)
         .build()
 

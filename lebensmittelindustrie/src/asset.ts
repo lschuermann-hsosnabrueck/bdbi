@@ -69,7 +69,6 @@ export async function publishAgriProductAsset(
 
     const data = resultUrl && await fetch(resultUrl)
     const order = await data.json()
-    //console.log(await data.json())
 
     const serviceBuilder = new ServiceBuilder({
         serviceType: ServiceTypes.COMPUTE,
@@ -88,8 +87,9 @@ export async function publishAgriProductAsset(
         .addFile(urlFile)
         .setPricing(pricingConfig.FREE)
         .setDatatokenNameAndSymbol('My Datatoken Name', 'SYMBOL') // important for following access token transactions in the explorer
-        .addTrustedAlgorithmPublisher('0x103501f5db82F162ec6807d21A8D847ed4b77cAc')
-        .addTrustedAlgorithms([{did: 'did:op:6668b23f3b8f30985451d3cd3f10b145958a4c9f846eae46ecdc738101bc7b2c'}]) // algorithm to create order
+        .addTrustedAlgorithmPublisher('0x103501f5db82F162ec6807d21A8D847ed4b77cAc') //Hinzufügen von accounts
+        .addTrustedAlgorithmPublisher('0xb2D3015C7356Dfde2FFe3AaBf148460A03dc74A3')
+        .addTrustedAlgorithms([{did: 'did:op:6668b23f3b8f30985451d3cd3f10b145958a4c9f846eae46ecdc738101bc7b2c'}]) // Hier entsprechende Algorithmen angeben
         .build()
 
     const assetBuilder = new AssetBuilder()
@@ -109,7 +109,7 @@ export async function publishAgriProductAsset(
         .setLicense('MIT')
         .addService(service)
         .setOwner(owner)
-        .addCredentialAddresses(CredentialListTypes.ALLOW, ['0x103501f5db82F162ec6807d21A8D847ed4b77cAc'])
+        .addCredentialAddresses(CredentialListTypes.ALLOW, ['0x103501f5db82F162ec6807d21A8D847ed4b77cAc', '0xb2D3015C7356Dfde2FFe3AaBf148460A03dc74A3']) // hier Accounts hinzufügen, die Zugriff haben sollen
         .build()
 
     const result = await nautilus.publish(asset)
@@ -176,7 +176,7 @@ export async function publishAgriAlgoAsset(
         .setLicense('MIT')
         .setAlgorithm(algoMetadata)
         .addService(service)
-        .addCredentialAddresses(CredentialListTypes.ALLOW, ['0x103501f5db82F162ec6807d21A8D847ed4b77cAc'])
+        .addCredentialAddresses(CredentialListTypes.ALLOW, ['0x103501f5db82F162ec6807d21A8D847ed4b77cAc', '0xb2D3015C7356Dfde2FFe3AaBf148460A03dc74A3']) // hier Accounts hinzufügen, die Zugriff haben sollen
         .setOwner(owner)
         .build()
 

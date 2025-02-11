@@ -64,8 +64,6 @@ async function main(){
     // Nach Abschluss zurück zum Menü
     await main();
 
-    // const asset = await nautilus.getAquariusAsset("did:op:18bce08da1adaf545be512d9592b4175c29e2136ec60c10d472fb3860fecf60e")
-    // console.log('Name of asset: ', asset.metadata.name)
 }
 
 main()

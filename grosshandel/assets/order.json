@@ -1,0 +1,15 @@
+{
+  "orderId" : "",
+  "date": "",
+  "origin" : {
+    "country" : "",
+    "grower" : ""
+  },
+  "productName": "",
+  "quantity": 0,
+  "pricePerUni": 0,
+  "minOrderQuantity": 0,
+  "deliveryArea": "",
+  "totalPrice": 0,
+  "certificate": ""
+}

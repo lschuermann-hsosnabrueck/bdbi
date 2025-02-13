@@ -2,7 +2,7 @@
 
 Der Projektaufbau wird in der README im root-Verzeichnis dieses Repos erläutert.
 
-Über die Konsole kann nach npms start ein neues Lebensmittelprodukt im Pontus-X Datenraum veröffentlicht werden.
+Über die Konsole kann nach ``npm start`` ein neues Lebensmittelprodukt im Pontus-X Datenraum veröffentlicht werden.
 Bei der Erstellung muss die DID des Agri-Produktes angegeben werden.
 
 In [asset.ts](src/asset.ts) können in Zeile 112 und 179 Accounts hinzugefügt werden, die Zugriff auf die Assets haben sollen.

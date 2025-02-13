@@ -1,6 +1,6 @@
 import { load } from 'ts-dotenv'
 import { LogLevel, Nautilus } from '@deltadao/nautilus'
-import { Network, NETWORK_CONFIGS, PRICING_CONFIGS } from './config'
+import { Network, NETWORK_CONFIGS} from './config'
 import { Wallet, providers} from 'ethers'
 import {computeAndPrint} from "./asset";
 import {askQuestion} from "./ui"
@@ -28,7 +28,6 @@ if (!(selectedEnvNetwork in Network)) {
 
 console.log(`Your selected NETWORK is ${Network[selectedEnvNetwork as Network]}`)
 const networkConfig = NETWORK_CONFIGS[selectedEnvNetwork as Network]
-const pricingConfig = PRICING_CONFIGS[selectedEnvNetwork as Network]
 
 const privateKey = env.PRIVATE_KEY as string // make sure to setup your PRIVATE_KEY in .env file
 const provider = new providers.JsonRpcProvider(networkConfig.nodeUri)
@@ -40,10 +39,10 @@ async function main(){
     Nautilus.setLogLevel(LogLevel.Verbose) // optional to show more nautilus internal logs
     const nautilus = await Nautilus.create(wallet, networkConfig)
     console.log("Willkommen! Was möchten Sie tun?");
-    console.log("1: Buy Agri-Produkt-Asset");
+    console.log("1: Bestelle Lebensmittel-Produkt-Asset");
     console.log("0: Beenden");
 
-    const choice = await askQuestion("Bitte wählen Sie eine Option (1, 2 oder 0): ");
+    const choice = await askQuestion("Bitte wählen Sie eine Option (1 oder 0): ");
 
     switch (choice) {
         case '1':
@@ -60,8 +59,6 @@ async function main(){
     // Nach Abschluss zurück zum Menü
     await main();
 
-    // const asset = await nautilus.getAquariusAsset("did:op:18bce08da1adaf545be512d9592b4175c29e2136ec60c10d472fb3860fecf60e")
-    // console.log('Name of asset: ', asset.metadata.name)
 }
 
 main()

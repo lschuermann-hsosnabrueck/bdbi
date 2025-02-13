@@ -20,7 +20,7 @@ export async function computeAndPrint(
   };
 
   let status = 1;
-  while (status !== 70) {
+  while (status !== 70 && status !== 31 && status !== 32) {
     await sleep(10000);
     let jobStatus = await nautilus.getComputeStatus(computeConfig);
     status = jobStatus.status;

@@ -13,7 +13,7 @@ Die Projekte haben alle einen ähnlichen Aufbau:
   - Bietet auch die Möglichkeit, einen neuen Algorithmus zu veröffentlichen, falls gewünscht
 - ui.ts als Hilfsfunktion 
 
-Um das Projekt zu starten sind folgende Schritte notwendig:
+Um ein Projekt zu starten, sind jeweils innerhalb des Projektordners folgende Schritte notwendig:
 1. Installation der node Module: `npm install`
 2. Einrichten der .env Datei: `cp ./exmaple.env ./env`
 3. Einfügen in die .env Datei
